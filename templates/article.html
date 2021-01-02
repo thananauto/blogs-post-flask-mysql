@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+<h2>Article</h2>
+
+{% for key, value in content.items() %}
+<h6>Key: {{key}}</h6>
+<p>Value: {{value}}</p>
+{% endfor %}
+
+<a class="btn btn-primary" href="{{ url_for('articles')}}" role="button">Back to articles</a>
+{% endblock %}

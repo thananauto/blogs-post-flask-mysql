@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+<h2>Articles</h2>
+{% for data in content %}
+<div class="list-group">
+    <a href="/article/{{data.id}}" class="list-group-item list-group-item-action">{{data.name}}</a>
+    </div>
+
+{% endfor %}
+
+{% endblock %}
