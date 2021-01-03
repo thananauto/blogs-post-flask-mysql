@@ -40,14 +40,14 @@ def about():
 
 @app.route('/articles')
 def articles():
-    data = data_sets()
+    data = Articles.query.all()
     return render_template('articles.html', content = data)
 
 
 @app.route('/article/<int:id>')
 def article(id):
     data = [dat for dat in data_sets() if dat['id'] == id]
-    print(data)
+    
     return render_template('article.html', content = data[0])
 
 
@@ -99,7 +99,7 @@ def login():
                 session['username'] = username
                 nxt = request.args.get('next')
                 #return redirect_dest(fallback=render_template('dashboard.html'))
-                return  redirect( url_for(nxt)) if nxt else render_template('dashboard.html')
+                return  redirect( url_for(nxt)) if nxt else redirect(url_for('dashboard'))
             else:
                 error = 'Invalid password'
                 return render_template('login.html', error= error)   
@@ -112,11 +112,47 @@ def login():
 @login_required
 def dashboard():
     articles = Articles.query.all()
-    if len(articles) >0:
+    if len(articles) == 0:
         msg = "No articles found"
         return render_template('dashboard.html', msg = msg)
     else:
         return render_template('dashboard.html', articles = articles)
+
+
+@app.route('/delete/<int:id>')
+@login_required
+def delete(id):
+    article = Articles.query.filter_by(id=id).first()
+   
+    if article is not None: 
+        db.session.delete(article)
+        db.session.commit()
+    return redirect(url_for('dashboard'))    
+
+@app.route('/edit/<int:id>', methods = ['GET', 'POST'])
+@login_required
+def edit(id):
+    article = Articles.query.filter_by(id=id).first()
+    form = ArticleForm(request.form)
+    article = Articles.query.filter_by(id=id).first()
+    if article is not None and request.method == 'GET':
+        
+        edit_data = {
+            'title' : article.title,
+            'body' : article.body
+        }
+        form.title.data = article.title
+        form.body.data = article.body
+        return render_template('dashboard.html',form = form,  data = edit_data)
+    elif request.method == 'POST' and form.validate():
+        article.title = form.title.data
+        article.body = form.body.data
+        db.session.add(article)
+        db.session.commit()
+        flash('Your article is successfully updated', 'success')
+        return redirect(url_for('dashboard'))
+    return render_template('dashboard.html', form = form)    
+
 
 @app.route('/logout')
 @login_required
@@ -124,8 +160,8 @@ def logout():
     session.clear()
     return redirect( url_for('login'))
 
-@app.route('/add_article', methods = ['POST', 'GET'])
-def add_article():
+@app.route('/add_article/<id>', methods = ['POST', 'GET'])
+def add_article(id = None):
     article_form = ArticleForm(request.form)
 
     if request.method == 'POST' and article_form.validate():
@@ -136,7 +172,7 @@ def add_article():
         db.session.commit()
         flash('Your article is successfully added', 'success')
         return redirect(url_for('dashboard'))
-
+    
     return render_template('dashboard.html', form = article_form)
 
 

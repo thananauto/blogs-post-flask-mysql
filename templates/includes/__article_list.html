@@ -1,0 +1,24 @@
+
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">S.No</th>
+        <th scope="col">Article Name</th>
+        <th scope="col">Author</th>
+        <th scope="col">Update</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for article in articles %}
+      <tr>
+        <th scope="row">{{ loop.index }}</th>
+        <td>{{ article.title}}</td>
+        <td>{{ article.author}}</td>
+        <td><a class="btn btn-success" href="{{ url_for('edit', id=article.id)}}" role="button">Edit</a></td>
+        <td><a class="btn btn-danger" href="{{ url_for('delete', id=article.id)}}" role="button">Delete</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+

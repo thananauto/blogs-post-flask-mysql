@@ -2,10 +2,17 @@
 {% block body %}
 
 <div class="jumbotron text-center my-3">
-    <h1 class="display-4">Welcome to my article</h1>
-    <p class="lead">This is the basic python course that uses the flask</p>
+    <h1 class="display-4">Welcome to my blog</h1>
+    <p class="lead">This is the basic blog app which was built using the bootstrap 4.0 as frontend and flask as backend</p>
     <hr class="my-4">
     <p>Learn the course form splitify</p>
+    {% if not session.username %}
+
+
+    <a href="{{ url_for('register')}}" class="btn btn-primary btn-lg " role="button">Register</a>
+    <a href="{{ url_for('login')}}" class="btn btn-success btn-lg " role="button" >Login</a>
+
+{% endif %}
 </div>
 
 {% endblock %}
