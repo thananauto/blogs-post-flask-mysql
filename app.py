@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, flash, session, logging, redirect, url_for
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
-from data import data_sets
 from models import *
 from functools import wraps
 
