@@ -8,7 +8,8 @@ from functools import wraps
 app = Flask(__name__)
 
 app.debug = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@localhost:8889/flask_articles'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@localhost:8889/flask_articles'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///articles.db'
 app.config['SECRET_KEY'] =  b'_5#y2L"F4Q8z\n\xec]/'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -40,15 +41,18 @@ def about():
 
 @app.route('/articles')
 def articles():
-    data = Articles.query.all()
-    return render_template('articles.html', content = data)
+    data = Articles.query.all() 
+    short_body_text = []
+    for dat in data:
+        short_body_text.append(dat.body[0:round(len(dat.body)/4)]+'....')
+    return render_template('articles.html', content = data, text = short_body_text)
 
 
 @app.route('/article/<int:id>')
 def article(id):
-    data = [dat for dat in data_sets() if dat['id'] == id]
-    
-    return render_template('article.html', content = data[0])
+    article = Articles.query.filter_by(id=id).first()
+   
+    return render_template('article.html', content = article)
 
 
 class RegisterForm(Form):
