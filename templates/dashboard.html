@@ -1,29 +1,29 @@
 {% extends 'layout.html' %}
 {% block body %}
 
+{% if form %}
+   
+  {% if data %}
+      <h2>Edit Article</h2>
+      {% include 'includes/__edit_article.html'%}
+      <hr>
+  {% else %}
+      <h2>Add Article</h2>
+      {% include 'includes/__add_article.html'%}
+      <hr>    
+  {% endif %}    
+{% else %}
 <div class="card">
     <div class="card-body">
       <h5 class="card-title">Dashboard</h5>
       <h6 class="card-subtitle mb-2 text-muted">Welcome...! Mr {{ session.username}}</h6>
+      <a class="btn btn-primary" href="{{ url_for('add_article', id = 0)}}" role="button">Add Article</a>   
     </div>
   </div>
+
+{% endif %}
   <hr>
-  <div class="container">
-      {% if form %}
-      {% from 'includes/__formhelpers.html' import render_field %}
-      <form action="" method="post">
-          <div class="form-group">
-              {{ render_field(form.title, class="form-control") }}
-          </div>
-          <div class="form-group">
-              {{ render_field(form.body, class="form-control", id="editor") }}
-          </div>
-          <input type="submit" class="btn btn-primary" value="Submit">
-          <a class="btn btn-primary" href="{{ url_for('dashboard')}}" role="button">Cancel</a>
-      </form>
-      {% else %}
-      <a class="btn btn-primary" href="{{ url_for('add_article')}}" role="button">Add Article</a>
-      {% endif %}
-        
-  </div>
+  {% if articles %}
+    {% include 'includes/__article_list.html'%}
+  {% endif %}   
 {% endblock %}
