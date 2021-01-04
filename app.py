@@ -161,7 +161,7 @@ def edit(id):
 @login_required
 def logout():
     session.clear()
-    return redirect( url_for('login'))
+    return redirect( url_for('index'))
 
 @app.route('/add_article/<id>', methods = ['POST', 'GET'])
 def add_article(id = None):
