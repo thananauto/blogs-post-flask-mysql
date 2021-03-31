@@ -7,8 +7,8 @@ from functools import wraps
 app = Flask(__name__)
 
 app.debug = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@localhost:8889/flask_articles'
-#capp.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///articles.db'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@localhost:8889/flask_articles'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///articles.db'
 app.config['SECRET_KEY'] =  b'_5#y2L"F4Q8z\n\xec]/'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
