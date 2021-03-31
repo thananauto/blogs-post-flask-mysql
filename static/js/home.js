@@ -3,10 +3,7 @@
 
 
 document.addEventListener('DOMContentLoaded', function(e){
-    setTimeout(function () {
-        document.querySelector(".alert button").click()
-    }, 5000);
-})
+
 
 //pass the data from html to modal
 const modals = document.querySelectorAll(".open_modal");
@@ -25,3 +22,7 @@ modals.forEach((modal) => {
   });
 });
 
+
+
+    
+})

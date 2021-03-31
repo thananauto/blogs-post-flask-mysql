@@ -66,6 +66,17 @@ class ArticleForm(Form):
     body = TextAreaField('Body', [validators.Length(min=4)])
        
 
+
+@app.after_request
+def add_header(response):
+    """
+    Add headers to both force latest IE rendering engine or Chrome Frame,
+    and also to cache the rendered page for 10 minutes.
+    """
+    response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
+    response.headers['Cache-Control'] = 'public, max-age=0'
+    return response
+    
 @app.route('/register', methods = ['GET', 'POST'])
 def register():
     form = RegisterForm(request.form)
