@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container my-3">
     {% from 'includes/__formhelpers.html' import render_field %}
     <form action="" method="post">
         <div class="form-group"> 
@@ -7,7 +7,8 @@
         <div class="form-group">
             {{ render_field(form.body, class="form-control", id="editor") }}
         </div>
-        <input type="submit" class="btn btn-primary" value="Update">
-        <a class="btn btn-primary" href="{{ url_for('dashboard')}}" role="button">Cancel</a>
+ 
+        <button type="submit" class="btn btn-primary"><i class="fa fa-wrench mr-2" aria-hidden="true"></i> Update</button>
+        <a class="btn btn-primary" href="{{ url_for('dashboard')}}" role="button"><i class="fa fa-times mr-2" aria-hidden="true"></i>Cancel</a>
     </form>    
 </div>

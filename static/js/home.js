@@ -23,6 +23,23 @@ modals.forEach((modal) => {
 });
 
 
+//edit the user details
 
-    
+const profSave= document.querySelector('#profileSave')
+const profEdit = document.querySelector('#profileEdit')
+const profInput = document.querySelectorAll(".form-control")
+
+if(profEdit!= null){
+profEdit.addEventListener('click', ()=>{
+    profInput.forEach((eachInput)=>{
+      eachInput.removeAttribute('readonly')
+    })
+})
+
+profSave.addEventListener('click', ()=>{
+  profInput.forEach((eachInput)=>{
+    eachInput.setAttribute('readonly', true)
+  })
+})
+}
 })
