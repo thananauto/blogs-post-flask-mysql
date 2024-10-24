@@ -3,6 +3,7 @@ from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
 from models import *
 from functools import wraps
+import os
 
 app = Flask(__name__)
 
@@ -196,4 +197,5 @@ def create_database():
        
 
 if __name__ =='main':
-    app.run()
+    
+    app.run(debug=True)
