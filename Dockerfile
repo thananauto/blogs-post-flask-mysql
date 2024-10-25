@@ -1,5 +1,10 @@
 # start by pulling the python image
-FROM python:3.8-slim-buster
+FROM python:3.9-slim
+
+# install the sql client
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y gcc pkg-config default-libmysqlclient-dev
 
 # set the workdir
 WORKDIR /app
@@ -8,7 +13,7 @@ WORKDIR /app
 COPY requirements.txt requirements.txt
 
 # install all dependencies
-RUN pip3 install -r requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt
 
 #copy rest of the code
 COPY . .
