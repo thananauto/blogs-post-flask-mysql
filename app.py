@@ -12,7 +12,9 @@ app.debug = True
 db_username = os.environ.get('MYSQL_USER', 'root')
 db_password = os.environ.get('MYSQL_PASSWORD', 'password')
 db_mysql_host = os.environ.get('MYSQL_HOST', 'localhost')
-app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://{db_username}:{db_password}@{db_mysql_host}/flask_articles'
+print(f'mysql+pymysql://{db_username}:{db_password}@{db_mysql_host}/flask_articles')
+app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql://root:password@mysql:3306/flask_articles'
+#app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://{db_username}:{db_password}@{db_mysql_host}/flask_articles'
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///articles.db'
 app.config['SECRET_KEY'] =  b'_5#y2L"F4Q8z\n\xec]/'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -201,4 +203,4 @@ def create_database():
        
 
 if __name__ =='main':
-    app.run()
+    app.run(debug=True)
