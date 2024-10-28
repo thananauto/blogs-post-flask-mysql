@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-volume
+  labels:
+    name: pv-mysql-volume
+spec:
+  claimRef:
+    name: pvc-mysql
+  capacity:
+    storage: 3Gi
+  accessModes:
+      - ReadWriteOnce
+  hostPath:
+      path: /mnt
+  storageClassName: localstorage
