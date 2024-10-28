@@ -3,15 +3,12 @@ kind: PersistentVolume
 metadata:
   name: pv-mysql
   labels:
-    name: flask-mysql-app
+      name: flask-mysql-app
 spec:
-  claimRef:
-    name: pvc-mysql
+  storageClassName: manual
   capacity:
-    storage: 5Gi
-  persistentVolumeReclaimPolicy: Retain
+    storage: 10Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
     path: /mnt/data/mysql
-  storageClassName: localstorage

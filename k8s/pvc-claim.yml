@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: pvc-mysql
 spec:
-  storageClassName: localstorage
+  storageClassName: manual
   accessModes:
     - ReadWriteOnce
   resources:

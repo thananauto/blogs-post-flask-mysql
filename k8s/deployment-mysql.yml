@@ -26,15 +26,15 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: env-config-app
-                  key: password
+                  key: PASSWORD
 
-          livenessProbe:
+          startupProbe:
             tcpSocket:
               port: 3306
             initialDelaySeconds: 5
-            failureThreshold: 2
+            failureThreshold: 10
             periodSeconds: 10
-            timeoutSeconds: 30
+
 
           volumeMounts:
             - name: mysql-initdb
@@ -46,9 +46,7 @@ spec:
         - name: mysql-initdb
           configMap:
             name: config-mysql
-            items:
-             - key: init.sql
-               path: .
+
         - name: data-mysql
           persistentVolumeClaim:
             claimName: pvc-mysql
