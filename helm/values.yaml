@@ -3,7 +3,7 @@
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
-
+namspace: qa
 backendimage:
   repository: mysql
   pullPolicy: IfNotPresent
@@ -19,11 +19,11 @@ frontendimage:
   tag: 1.0.0
 
 environment:
-  PASSWORD: password
-  MYSQL_USER: root
-  MYSQL_PASSWORD: password
-  MYSQL_PORT: 3306
-  SECRET_KEY: secret
+  password: password
+  mysqluser: root
+  mysqlpassword: password
+  mysqlport: 3306
+  secretkey: secret
 
 service:
   type: ClusterIP
@@ -32,6 +32,7 @@ service:
   targetPort: 5000
 
 serviceBackend:
+  type: ClusterIp
   port: 3306
   targetPort: 3306
 
