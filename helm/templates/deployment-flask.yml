@@ -19,10 +19,10 @@ spec:
     spec:
       containers:
         - name: web-app
-          image: {{ .Values.frontendimage.repository }}:{{ .Values.frontendimage.tag }}
+          image: {{ .Values.flask.repository }}:{{ .Values.flask.tag }}
           ports:
-            - containerPort: {{ .Values.frontendimage.containerPort }}
-          imagePullPolicy: {{ .Values.frontendimage.pullPolicy }}
+            - containerPort: 5000
+          imagePullPolicy: {{ .Values.flask.pullPolicy }}
           envFrom:
             - configMapRef:
                 name: {{ .Release.Name }}-env-config-app

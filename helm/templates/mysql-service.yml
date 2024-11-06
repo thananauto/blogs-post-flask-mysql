@@ -6,9 +6,9 @@ metadata:
 spec:
   selector:
     name: mysql-app-pod
-  type: {{ .Values.serviceBackend.type }}
+  type: {{ .Values.mysqlService.type }}
   ports:
     - name: http-port
-      port: {{ .Values.serviceBackend.port }}
-      targetPort: {{ .Values.serviceBackend.targetPort }}
+      port: {{ .Values.mysqlService.port }}
+      targetPort: {{ .Values.mysqlService.targetPort }}
 

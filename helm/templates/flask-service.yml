@@ -8,9 +8,9 @@ metadata:
 spec:
   selector:
     name: flask-app-pod
-  type: NodePort
+  type: {{ .Values.flaskService.type }}
   ports:
     - name: http-port
-      port: {{ .Values.service.port }}
-      targetPort: {{ .Values.service.targetPort }}
-      nodePort: {{ .Values.service.nodePort }}
+      port: {{ .Values.flaskService.port }}
+      targetPort: {{ .Values.flaskService.targetPort }}
+      nodePort: {{ .Values.flaskService.nodePort }}
