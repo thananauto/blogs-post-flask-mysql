@@ -28,7 +28,7 @@ flaskService:
   targetPort: 5000
 
 mysqlService:
-  type: ClusterIp
+  type: ClusterIP
   port: 3306
   targetPort: 3306
 
