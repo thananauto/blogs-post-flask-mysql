@@ -24,7 +24,7 @@ environment:
 flaskService:
   type: NodePort
   port: 8080
-  nodePort: 32000
+  nodePort: 32001
   targetPort: 5000
 
 mysqlService:
